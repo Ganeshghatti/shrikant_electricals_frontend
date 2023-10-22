@@ -117,9 +117,6 @@ export default function Account() {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <section>
-            <h1>This is accounts section</h1>
-          </section>
-          {/* <section>
             <span>{accountdetails.user.first_name} &nbsp;</span>
             <span>{accountdetails.user.last_name}</span>
             <p>Email: {accountdetails.user.email}</p>
@@ -128,7 +125,7 @@ export default function Account() {
             <p>EPF: {accountdetails.user.EPF}</p>
             <p>ESI: {accountdetails.user.ESI}</p>
             <p>Tenure: {accountdetails.user.Tenure}</p>
-          </section> */}
+          </section>
         </CustomTabPanel>
       </Box>
     </section>
