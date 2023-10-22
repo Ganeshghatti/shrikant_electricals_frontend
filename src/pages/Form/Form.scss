@@ -1,0 +1,17 @@
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+#form {
+  width: 100vw;
+  @include flex(column);
+  justify-content: center;
+  align-items: center;
+  padding: 13vh 0 0 0;
+  form {
+    @include flex(column);
+    width: 75vw;
+    gap: 30px;
+  }
+}

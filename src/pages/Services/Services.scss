@@ -1,0 +1,32 @@
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+#services {
+  width: 100vw;
+  @include flex(column);
+  align-items: center;
+  padding: 40px 0;
+  h6{
+    text-align: center;
+    padding: 0 10vw;
+  }
+}
+.card {
+  margin: auto;
+  cursor: pointer;
+  padding: 10px 0 0 0;
+  box-shadow: rgba(1, 143, 220, 0.779) 0px 3px 8px !important;
+  &:hover {
+    scale: 1.02;
+  }
+  @media (max-width: 770px) {
+    margin: 30px auto 0 auto;
+  }
+}
+.services-row1 {
+  padding: 50px 0 40px 0;
+  @media (max-width: 770px) {
+    padding: 0;
+  }
+}

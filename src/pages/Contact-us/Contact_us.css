@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap");
+.Contact_us {
+  width: 98vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0 20px 0;
+}
+@media (max-width: 950px) {
+  .Contact_us {
+    flex-direction: column;
+    height: auto;
+  }
+}
+.Contact_us .contact-left-div {
+  width: 42vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-left-div {
+    width: 98vw;
+    justify-content: center;
+  }
+}
+.Contact_us .contact-left-div .Get_In_Touch {
+  width: 70%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+@media (max-width: 1250px) {
+  .Contact_us .contact-left-div .Get_In_Touch {
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-left-div .Get_In_Touch {
+    width: 75%;
+  }
+}
+.Contact_us .contact-right-div {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-right-div {
+    width: 98vw;
+    gap: 10px;
+  }
+}
+.Contact_us .contact-right-div form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.Contact_us .contact-right-div form .contact-right-name-div {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  justify-content: space-between;
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-right-div form .contact-right-name-div {
+    width: 69vw;
+  }
+}
+@media (max-width: 650px) {
+  .Contact_us .contact-right-div form .contact-right-name-div {
+    width: 70vw;
+  }
+}
+.Contact_us .contact-right-div form .contact-right-name-div .contact-right-firstname,
+.Contact_us .contact-right-div form .contact-right-name-div .contact-right-lastname {
+  width: 170px;
+  height: 32px;
+  background: #333333;
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-right-div form .contact-right-name-div .contact-right-firstname,
+  .Contact_us .contact-right-div form .contact-right-name-div .contact-right-lastname {
+    width: 30vw;
+  }
+}
+.Contact_us .contact-right-div form #contact input:focus,
+.Contact_us .contact-right-div form #contact textarea:focus {
+  border: 2px solid #0282af;
+}
+.Contact_us .contact-right-div form .contact-right-email,
+.Contact_us .contact-right-div form .contact-right-phone {
+  width: 400px;
+  height: 32px;
+  background: #333333;
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-right-div form .contact-right-email,
+  .Contact_us .contact-right-div form .contact-right-phone {
+    width: 70vw;
+  }
+}
+.Contact_us .contact-right-div form .contact-right-message {
+  width: 400px;
+  height: 50px;
+  resize: none;
+  background: #333333;
+  padding: 10px 0 0 20px;
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+@media (max-width: 950px) {
+  .Contact_us .contact-right-div form .contact-right-message {
+    width: 70vw;
+  }
+}
+.Contact_us .contact-right-div form .contact-right-email,
+.Contact_us .contact-right-div form .contact-right-phone,
+.Contact_us .contact-right-div form .contact-right-firstname,
+.Contact_us .contact-right-div form .contact-right-lastname {
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  outline: none;
+  padding: 0 0 0 20px;
+  border: none;
+  border-radius: 5px;
+}
+.Contact_us .contact-right-div form .contact-right-getintouch-text,
+.Contact_us .contact-right-div form .contact-right-description {
+  margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -webkit-appearance: none;
+          appearance: none;
+  -moz-appearance: textfield;
+}
+
+#contact input::-moz-placeholder {
+  color: rgb(176, 176, 176);
+}
+
+#contact input::placeholder {
+  color: rgb(176, 176, 176);
+}
+
+#contact textarea::-moz-placeholder {
+  color: rgb(176, 176, 176);
+}
+
+#contact textarea::placeholder {
+  color: rgb(176, 176, 176);
+}/*# sourceMappingURL=Contact_us.css.map */

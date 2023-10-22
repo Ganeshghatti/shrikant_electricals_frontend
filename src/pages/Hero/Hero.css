@@ -1,0 +1,61 @@
+#hero {
+  width: 100vw;
+  height: 120vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-image: url("../../../public/Assets/Images/hero_bg.png");
+  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#hero .hero-div {
+  width: 90vw;
+}
+#hero .hero-div .hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+  padding: 0 5vw 15vh 0;
+  gap: 10px;
+}
+@media (max-width: 770px) {
+  #hero .hero-div .hero-left {
+    height: 50vh;
+    padding: 0;
+    align-items: center;
+  }
+}
+#hero .hero-div .hero-left h1,
+#hero .hero-div .hero-left h5 {
+  color: white;
+}
+@media (max-width: 770px) {
+  #hero .hero-div .hero-left h1,
+  #hero .hero-div .hero-left h5 {
+    text-align: center;
+  }
+}
+#hero .hero-div .hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 0 15vh 0;
+}
+@media (max-width: 770px) {
+  #hero .hero-div .hero-right {
+    height: 50vh;
+    justify-content: flex-start;
+  }
+}
+#hero .hero-div .hero-right img {
+  width: 55vw;
+}
+@media (max-width: 770px) {
+  #hero .hero-div .hero-right img {
+    width: 90vw;
+  }
+}/*# sourceMappingURL=Hero.css.map */

@@ -1,0 +1,25 @@
+#login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.registerInputContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 40vw;
+}
+
+.lIcon {
+  left: 3%;
+}
+
+.key {
+  left: 90%;
+  cursor: pointer;
+}/*# sourceMappingURL=Login.css.map */

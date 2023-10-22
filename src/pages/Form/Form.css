@@ -1,0 +1,14 @@
+#form {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 13vh 0 0 0;
+}
+#form form {
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+  gap: 30px;
+}/*# sourceMappingURL=Form.css.map */

@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap");
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+.Contact_us {
+  width: 98vw;
+  height: 90vh;
+  @include flex(row);
+  padding: 20px 0 20px 0;
+  @media (max-width: 950px) {
+    flex-direction: column;
+    height: auto;
+  }
+  .contact-left-div {
+    width: 42vw;
+    @include flex(row);
+    justify-content: flex-end;
+    @media (max-width: 950px) {
+      width: 98vw;
+      justify-content: center;
+    }
+    .Get_In_Touch {
+      width: 70%;
+      object-fit: contain;
+      @media (max-width: 1250px) {
+        object-fit: contain;
+      }
+      @media (max-width: 950px) {
+        width: 75%;
+      }
+    }
+  }
+  .contact-right-div {
+    @include flex(column);
+    width: 50vw;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    @media (max-width: 950px) {
+      width: 98vw;
+      gap: 10px;
+    }
+    form {
+      @include flex(column);
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+      .contact-right-name-div {
+        @include flex(row);
+        width: 400px;
+        justify-content: space-between;
+        @media (max-width: 950px) {
+          width: 69vw;
+        }
+        @media (max-width: 650px) {
+          width: 70vw;
+        }
+        .contact-right-firstname,
+        .contact-right-lastname {
+          width: 170px;
+          height: 32px;
+          background: #333333;
+          @media (max-width: 950px) {
+            width: 30vw;
+          }
+        }
+      }
+      #contact input,
+      #contact textarea {
+        &:focus {
+          border: 2px solid #0282af;
+        }
+      }
+      .contact-right-email,
+      .contact-right-phone {
+        width: 400px;
+        height: 32px;
+        background: #333333;
+        @media (max-width: 950px) {
+          width: 70vw;
+        }
+      }
+      .contact-right-message {
+        width: 400px;
+        height: 50px;
+        resize: none;
+        background: #333333;
+        padding: 10px 0 0 20px;
+        color: #fff;
+        font-family: "Red Hat Display", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        @media (max-width: 950px) {
+          width: 70vw;
+        }
+      }
+      .contact-right-email,
+      .contact-right-phone,
+      .contact-right-firstname,
+      .contact-right-lastname {
+        color: #fff;
+        font-family: "Red Hat Display", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        outline: none;
+        padding: 0 0 0 20px;
+        border: none;
+        border-radius: 5px;
+      }
+      .contact-right-getintouch-text,
+      .contact-right-description {
+        margin: 0;
+      }
+    }
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+#contact input::placeholder {
+  color: rgb(176, 176, 176);
+}
+#contact textarea::placeholder {
+  color: rgb(176, 176, 176);
+}

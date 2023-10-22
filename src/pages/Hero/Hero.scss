@@ -1,0 +1,53 @@
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+#hero {
+  width: 100vw;
+  height: 120vh;
+  @include flex(row);
+  justify-content: center;
+  background-image: url("../../../public/Assets/Images/hero_bg.png");
+  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  .hero-div {
+    width: 90vw;
+    .hero-left {
+      @include flex(column);
+      justify-content: flex-end;
+      height: 100vh;
+      padding: 0 5vw 15vh 0;
+      gap: 10px;
+      @media (max-width: 770px) {
+        height: 50vh;
+        padding: 0;
+        align-items: center;
+      }
+      h1,
+      h5 {
+        color: white;
+        @media (max-width: 770px) {
+          text-align: center;
+        }
+      }
+    }
+    .hero-right {
+      @include flex(column);
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 0 15vh 0;
+      @media (max-width: 770px) {
+        height: 50vh;
+        justify-content: flex-start;
+      }
+      img {
+        width: 55vw;
+        @media (max-width: 770px) {
+          width: 90vw;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Alice&family=Oxygen:wght@300;400;700&family=Rufina:wght@400;700&display=swap");
+
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+nav {
+  width: 100vw;
+  height: 13vh;
+  @include flex(row);
+  align-items: center;
+  justify-content: space-around;
+  background-color: #f2cd14;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  left: 0;
+  @media (max-width: 770px) {
+    justify-content: space-between;
+    padding: 0 10vw;
+  }
+  .nav-logo-img {
+    width: 75px;
+  }
+  ul {
+    @include flex(row);
+    padding: 15px 0 0 0;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4vw;
+    li {
+      list-style: none;
+      margin: auto;
+      a {
+        text-decoration: none;
+        color: #333333;
+      }
+    }
+  }
+}
+.mobile-menu {
+  width: 70vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 30vw;
+  z-index: 999;
+  @include flex(column);
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  background-color: white;
+  ul {
+    @include flex(column);
+    justify-content: center;
+    gap: 20px;
+  }
+}
+.mobile-overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.559);
+  top: 0;
+  left: 0;
+  z-index: 998;
+}
+
+.loggedinash5{
+  font-size: clamp(0.75rem, 1.25vw, 1rem);
+  line-height: 1.6;
+  margin: 0;
+}
