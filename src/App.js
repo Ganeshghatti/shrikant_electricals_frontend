@@ -14,10 +14,12 @@ import Testaccount from "./pages/Testaccount/Testaccount";
 import UserNotFound from "./pages/NotFound/UserNotFound";
 import Home from "./pages/Home/Home";
 import Form from "./pages/Form/Form";
+import Spinnerf from "./components/Spinnerf";
 
 export default function App() {
   const dispatch = useDispatch();
   const employee = JSON.parse(localStorage.getItem("employee"));
+  let { isLoading } = useSelector((state) => state.loading);
 
   useEffect(() => {
     if (employee) {
@@ -35,21 +37,26 @@ export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/accounts/:username"
-          element={
-            <ProtectedRoute>
-              <Account />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/user-not-found" element={<UserNotFound />} />
-        <Route path="/form" element={<Form/>}/>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      {isLoading ? (
+        <Spinnerf />
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/accounts/:username"
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/user-not-found" element={<UserNotFound />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      )}
+
       <Footer />
     </BrowserRouter>
   );

@@ -11,6 +11,9 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import NotFound from "../NotFound/PageNotFound";
+import UserNotFound from "../NotFound/UserNotFound";
+import { startLoading, stopLoading } from "../../features/Loader";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,8 +49,10 @@ function a11yProps(index) {
 }
 
 export default function Account() {
+  const dispatch = new useDispatch();
   const [value, setValue] = React.useState(0);
   const [error, setError] = useState(null);
+  const [load, setload] = useState(false);
   const [accountdetails, setaccountdetails] = useState({
     first_name: "",
     last_name: "",
@@ -61,15 +66,17 @@ export default function Account() {
   const employee = useSelector((state) => state.employee);
 
   const { username } = useParams();
-  console.log("accountdetails", accountdetails);
+
   const employeeData = {
     email: employee.employee.email,
     token: employee.employee.token,
   };
+
   useEffect(() => {
     const getaccdata = async () => {
       if (employeeData.token) {
         try {
+          console.log("object");
           const response = await axios.get(
             `https://shrikant-electricals.onrender.com/account/${username}`,
             {
@@ -79,12 +86,10 @@ export default function Account() {
             }
           );
           setaccountdetails(response.data);
-          console.log(response.data);
-          console.log("accountdetails", accountdetails);
+          console.log(accountdetails);
+          setload(true);
         } catch (error) {
-          console.log(error.message);
           setError(error);
-          console.log("accountdetails if error", accountdetails);
         }
       }
     };
@@ -92,7 +97,8 @@ export default function Account() {
   }, [employee]);
 
   if (error) {
-    <Navigate to="/user-not-found" />;
+    console.log("error here");
+    return <Navigate to="/user-not-found" />;
   }
 
   const handleChange = (event, newValue) => {
@@ -101,33 +107,39 @@ export default function Account() {
 
   return (
     <section id="account">
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="Attendence" {...a11yProps(0)} />
-            <Tab label="Account Details" {...a11yProps(1)} />
-          </Tabs>
+      {accountdetails ? (
+        <Box sx={{ width: "100%" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label="Attendence" {...a11yProps(0)} />
+              <Tab label="Account Details" {...a11yProps(1)} />
+            </Tabs>
+          </Box>
+          <CustomTabPanel value={value} index={0}>
+            Item One
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={1}>
+            {load && (
+              <section>
+                <span>{accountdetails.user.first_name} &nbsp;</span>
+                <span>{accountdetails.user.last_name}</span>
+                <p>Email: {accountdetails.user.email}</p>
+                <p>Gender: {accountdetails.user.gender}</p>
+                <p>Salary: {accountdetails.user.Salary}</p>
+                <p>EPF: {accountdetails.user.EPF}</p>
+                <p>ESI: {accountdetails.user.ESI}</p>
+                <p>Tenure: {accountdetails.user.Tenure}</p>
+              </section>
+            )}
+          </CustomTabPanel>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          Item One
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          <section>
-            <span>{accountdetails.user.first_name} &nbsp;</span>
-            <span>{accountdetails.user.last_name}</span>
-            <p>Email: {accountdetails.user.email}</p>
-            <p>Gender: {accountdetails.user.gender}</p>
-            <p>Salary: {accountdetails.user.Salary}</p>
-            <p>EPF: {accountdetails.user.EPF}</p>
-            <p>ESI: {accountdetails.user.ESI}</p>
-            <p>Tenure: {accountdetails.user.Tenure}</p>
-          </section>
-        </CustomTabPanel>
-      </Box>
+      ) : (
+        <Spinner />
+      )}
     </section>
   );
 }

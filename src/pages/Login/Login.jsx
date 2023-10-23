@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import "./Login.scss";
 import { UseSelector } from "react-redux/es/hooks/useSelector";
+import { startLoading, stopLoading } from "../../features/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,15 +32,17 @@ const Login = () => {
     };
     if (employeeData.email && employeeData.password) {
       try {
+        dispatch(startLoading());
         const response = await axios.post(
           "https://shrikant-electricals.onrender.com/login",
           employeeData
         );
+        dispatch(stopLoading());
         const employee = {
           email: response.data.email,
           token: response.data.token,
           first_name: response.data.first_name,
-          isauthenticated:true,
+          isauthenticated: true,
         };
         localStorage.setItem("employee", JSON.stringify(employee));
         dispatch(
@@ -47,13 +50,14 @@ const Login = () => {
             email: employee.email,
             token: employee.token,
             first_name: employee.first_name,
-            isauthenticated:true
+            isauthenticated: true,
           })
         );
-        const username=employee.first_name
+        const username = employee.first_name;
+        console.log(username);
         window.location.href = `/accounts/${username}`;
       } catch (error) {
-        console.error("Error sending data:", error.message);
+        dispatch(stopLoading());
         seterrormessage(error.response.data);
       }
     } else {
