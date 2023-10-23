@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import logo from "./logo.png";
 
 export default function Navbar() {
   const [menu, setmenu] = useState(false);
@@ -85,7 +86,7 @@ export default function Navbar() {
         </>
       ) : null}
 
-      <img src="./Assets/Images/logo.png" className="nav-logo-img" />
+      <img src={logo} className="nav-logo-img" />
       {window.innerWidth > 700 ? (
         <>
           <ul>

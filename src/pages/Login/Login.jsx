@@ -17,8 +17,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errormessage, seterrormessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  localStorage.getItem("errormessage")
   const dispatch = useDispatch();
-
+  const buttonstylemobile = {
+    backgroundColor: "#333333",
+    color: "white",
+    margin: "0 auto",
+  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -58,6 +63,7 @@ const Login = () => {
         window.location.href = `/accounts/${username}`;
       } catch (error) {
         dispatch(stopLoading());
+        localStorage.setItem("errormessage",error.response.data)
         seterrormessage(error.response.data);
       }
     } else {
@@ -66,36 +72,47 @@ const Login = () => {
   };
   return (
     <section id="login">
-      <div className="registerInputContainer">
-        <img src={mail} alt="" className="lIcon" />
-        <input
-          type="text"
-          placeholder="Enter Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
+      <div className="login-container">
+        <div className="registerInputContainer">
+          <img src={mail} alt="" className="mail" style={{ width: "2.25vw" }} />
+          <input
+            type="text"
+            placeholder="Enter Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-      <div className="registerInputContainer">
-        <img src={key} alt="" className="lIcon" />
-        <input
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <img
-          src={eye}
-          alt=""
-          className={`key ${showPassword ? "show" : ""}`}
-          onClick={togglePasswordVisibility}
-        />
+        <div className="registerInputContainer">
+          <img src={key} alt="" className="key" style={{ width: "2.25vw" }} />
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <img
+            src={eye}
+            alt=""
+            className={`eye ${showPassword ? "show" : ""}`}
+            onClick={togglePasswordVisibility}
+            style={{ width: "2.25vw" }}
+          />
+        </div>
+        <p
+          className="register-error-message"
+          style={{ color: "red", fontWeight: "600" }}
+        >
+          {errormessage}{localStorage.getItem("errormessage")}
+        </p>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          style={buttonstylemobile}
+        >
+          Sign in
+        </Button>
       </div>
-
-      <p className="register-error-message">{errormessage}</p>
-      <Button variant="contained" onClick={handleSubmit}>
-        Sign in
-      </Button>
     </section>
   );
 };

@@ -14,6 +14,7 @@ import NotFound from "../NotFound/PageNotFound";
 import UserNotFound from "../NotFound/UserNotFound";
 import { startLoading, stopLoading } from "../../features/Loader";
 import Spinner from "react-bootstrap/esm/Spinner";
+import Button from "@mui/material/Button";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -104,7 +105,10 @@ export default function Account() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const buttonstyle = {
+    backgroundColor: "#F2CD14",
+    color: "black",
+  };
   return (
     <section id="account">
       {accountdetails ? (
@@ -114,25 +118,65 @@ export default function Account() {
               value={value}
               onChange={handleChange}
               aria-label="basic tabs example"
+              centered
             >
               <Tab label="Attendence" {...a11yProps(0)} />
               <Tab label="Account Details" {...a11yProps(1)} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            Item One
+            <section id="account-attendence">
+              <div>
+                <h1>Mark Todays Attendence</h1>
+                <Button variant="contained" style={buttonstyle}>
+                  Click here!
+                </Button>
+              </div>
+              <div>
+                <h1>This Week Stats</h1>
+                <Button variant="contained" style={buttonstyle}>
+                  Click here!
+                </Button>
+              </div>
+              <div>
+                <h1>This Month Stats</h1>
+                <Button variant="contained" style={buttonstyle}>
+                  Click here!
+                </Button>
+              </div>
+            </section>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             {load && (
-              <section>
-                <span>{accountdetails.user.first_name} &nbsp;</span>
-                <span>{accountdetails.user.last_name}</span>
-                <p>Email: {accountdetails.user.email}</p>
-                <p>Gender: {accountdetails.user.gender}</p>
-                <p>Salary: {accountdetails.user.Salary}</p>
-                <p>EPF: {accountdetails.user.EPF}</p>
-                <p>ESI: {accountdetails.user.ESI}</p>
-                <p>Tenure: {accountdetails.user.Tenure}</p>
+              <section id="account-details">
+                <h5 style={{ fontWeight: "900", padding: "20px 0" }}>
+                  {accountdetails.user.first_name} &nbsp;
+                  {accountdetails.user.last_name}
+                </h5>
+                <p>
+                  <b>Email: </b>
+                  {accountdetails.user.email}
+                </p>
+                <p>
+                  <b>Gender: </b>
+                  {accountdetails.user.gender}
+                </p>
+                <p>
+                  <b>Salary: </b>
+                  {accountdetails.user.Salary}
+                </p>
+                <p>
+                  <b>EPF: </b>
+                  {accountdetails.user.EPF}
+                </p>
+                <p>
+                  <b>ESI: </b>
+                  {accountdetails.user.ESI}
+                </p>
+                <p>
+                  <b>Tenure: </b>
+                  {accountdetails.user.Tenure}
+                </p>
               </section>
             )}
           </CustomTabPanel>

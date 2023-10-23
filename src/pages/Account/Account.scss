@@ -1,5 +1,37 @@
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
 #account {
   width: 100vw;
-  height: 100vh;
   margin-top: 13vh;
+  @include flex(row);
+  padding: 5vh 10vw;
+  @media (max-width: 770px) {
+    padding: 5vh 0;
+  }
+  #account-details {
+    width: 80vw;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin: auto;
+    @include flex(column);
+    padding: 5vh 0 5vh 10vw;
+    justify-content: center;
+  }
+  #account-attendence {
+    width: 80vw;
+    gap: 50px;
+    margin: auto;
+    @include flex(column);
+    padding: 5vh 5vw 5vh 5vw;
+    justify-content: center;
+    div {
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      padding: 30px;
+    }
+  }
 }

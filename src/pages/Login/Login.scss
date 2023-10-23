@@ -6,32 +6,65 @@
   align-items: center;
   justify-content: center;
   gap: 30px;
+  .login-container {
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    @media (max-width: 770px) {
+      width: 60vw;
+    }
+    .registerInputContainer {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      input {
+        font-size: 1.109vw;
+        font-weight: 500;
+        width: 90%;
+        line-height: 1.663vw;
+        border-radius: 0.277vw;
+        border: 1px solid #797585;
+        margin: 25px 0 0 0;
+        background-color: white;
+        padding: 10px 0px 10px 5vw;
+        &:focus {
+          background-color: white;
+        }
+      }
+    }
+  }
 }
-
-.registerInputContainer {
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 40vw;
-}
-// input {
-//   font-size: 1.109vw;
-//   font-weight: 500;
-//   line-height: 1.663vw;
-//   border-radius: 0.277vw;
-//   width: 100%;
-//   border: 1px solid #797585;
-//   padding: 1.109vw 0px 1.109vw 3.049vw;
-// }
-// input::placeholder {
-//   color: #797585;
-//   opacity: 1;
-// }
-.lIcon {
-  left: 3%;
-}
-
-.key {
-  left: 90%;
+.eye {
+  position: absolute;
+  right: 4vw;
+  top: 85%;
+  transform: translateY(-85%);
   cursor: pointer;
+  @media (max-width: 770px) {
+    right: 8vw;
+  }
+}
+.mail {
+  position: absolute;
+  left: 3.5vw;
+  top: 85%;
+  transform: translateY(-85%);
+  @media (max-width: 770px) {
+    left: 5vw;
+  }
+}
+.key {
+  position: absolute;
+  left: 3.5vw;
+  top: 85%;
+  transform: translateY(-85%);
+  @media (max-width: 770px) {
+    left: 5vw;
+  }
 }
