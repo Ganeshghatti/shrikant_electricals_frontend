@@ -1,1 +1,34 @@
-/*# sourceMappingURL=Account.css.map */
+#account {
+  width: 100vw;
+  margin-top: 13vh;
+  display: flex;
+  flex-direction: row;
+  padding: 5vh 10vw;
+}
+@media (max-width: 770px) {
+  #account {
+    padding: 5vh 0;
+  }
+}
+#account #account-details {
+  width: 80vw;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 5vh 0 5vh 10vw;
+  justify-content: center;
+}
+#account #account-attendence {
+  width: 80vw;
+  gap: 50px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 5vh 5vw 5vh 5vw;
+  justify-content: center;
+}
+#account #account-attendence div {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  padding: 30px;
+}/*# sourceMappingURL=Account.css.map */

@@ -1,0 +1,12 @@
+#admin{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  input{
+    min-width: 300px;
+  }
+}

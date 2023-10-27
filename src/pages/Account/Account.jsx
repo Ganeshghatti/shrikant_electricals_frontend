@@ -10,11 +10,12 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import NotFound from "../NotFound/PageNotFound";
-import UserNotFound from "../NotFound/UserNotFound";
+import NotFound from "../../components/NotFound/PageNotFound";
+import UserNotFound from "../../components/NotFound/UserNotFound";
 import { startLoading, stopLoading } from "../../features/Loader";
 import Spinner from "react-bootstrap/esm/Spinner";
 import Button from "@mui/material/Button";
+const moment = require("moment");
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,8 +53,8 @@ function a11yProps(index) {
 export default function Account() {
   const dispatch = new useDispatch();
   const [value, setValue] = React.useState(0);
-  const [error, setError] = useState(null);
   const [load, setload] = useState(false);
+  const [attendancemarked, setattendancemarked] = useState(true);
   const [accountdetails, setaccountdetails] = useState({
     first_name: "",
     last_name: "",
@@ -77,9 +78,9 @@ export default function Account() {
     const getaccdata = async () => {
       if (employeeData.token) {
         try {
-          console.log("object");
+          console.log("account page");
           const response = await axios.get(
-            `https://shrikant-electricals.onrender.com/account/${username}`,
+            `http://localhost:5000/account/${username}`,
             {
               headers: {
                 Authorization: `Bearer ${employeeData.token}`,
@@ -87,20 +88,28 @@ export default function Account() {
             }
           );
           setaccountdetails(response.data);
-          console.log(accountdetails);
           setload(true);
+          console.log(response.data.user.Attendence);
+          console.log(
+            response.data.user.Attendence[
+              response.data.user.Attendence.length - 1
+            ].day
+          );
+          console.log(currentDay);
+          if (
+            (response.data.user.Attendence[
+              response.data.user.Attendence.length - 1
+            ].day !== currentDay)
+          ) {
+            setattendancemarked(false);
+          }
         } catch (error) {
-          setError(error);
+          window.location.href = `/login`;
         }
       }
     };
     getaccdata();
   }, [employee]);
-
-  if (error) {
-    console.log("error here");
-    return <Navigate to="/user-not-found" />;
-  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -109,6 +118,25 @@ export default function Account() {
     backgroundColor: "#F2CD14",
     color: "black",
   };
+
+  const currentDay = moment().format("dddd");
+  const markattendencef = async () => {
+    try {
+      console.log(employeeData.token);
+      const response = await axios.post(
+        "http://localhost:5000/markattendence",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${employeeData.token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section id="account">
       {accountdetails ? (
@@ -126,12 +154,34 @@ export default function Account() {
           </Box>
           <CustomTabPanel value={value} index={0}>
             <section id="account-attendence">
-              <div>
-                <h1>Mark Todays Attendence</h1>
-                <Button variant="contained" style={buttonstyle}>
-                  Click here!
-                </Button>
-              </div>
+              {currentDay === "Sunday" || currentDay === "Saturday" ? (
+                <div>
+                  <h1 style={{ textAlign: "center" }}>
+                    Today is a holiday! Enjoy!!
+                  </h1>
+                </div>
+              ) : (
+                <>
+                  {attendancemarked ? (
+                    <div>
+                      <h1 style={{ textAlign: "center" }}>
+                        You Have already marked the attendance for today
+                      </h1>
+                    </div>
+                  ) : (
+                    <div>
+                      <h1>Mark Today's Attendance</h1>
+                      <Button
+                        variant="contained"
+                        style={buttonstyle}
+                        onClick={markattendencef}
+                      >
+                        Click here!
+                      </Button>
+                    </div>
+                  )}
+                </>
+              )}
               <div>
                 <h1>This Week Stats</h1>
                 <Button variant="contained" style={buttonstyle}>

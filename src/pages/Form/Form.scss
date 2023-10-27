@@ -8,10 +8,22 @@
   @include flex(column);
   justify-content: center;
   align-items: center;
-  padding: 13vh 0 0 0;
-  form {
-    @include flex(column);
-    width: 75vw;
-    gap: 30px;
+  padding: 15vh 0 5vh 0;
+  gap: 30px;
+  h4{
+    text-align: left;
+    align-self: flex-start;
+    padding: 0 10vw;
+
+  }
+  .form-container {
+    width: 80vw;
+    .form-container-div {
+      @include flex(column);
+      gap: 30px;
+      div{
+        @include flex(column);
+      }
+    }
   }
 }

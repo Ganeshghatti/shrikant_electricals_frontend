@@ -7,19 +7,75 @@
   justify-content: center;
   gap: 30px;
 }
-
-.registerInputContainer {
+#login .login-container {
+  width: 560px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+@media (max-width: 770px) {
+  #login .login-container {
+    width: 60vw;
+  }
+}
+#login .login-container .registerInputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
   align-items: center;
   position: relative;
-  width: 40vw;
+  justify-content: center;
+}
+#login .login-container .registerInputContainer input {
+  font-size: 1.109vw;
+  font-weight: 500;
+  width: 90%;
+  line-height: 1.663vw;
+  border-radius: 0.277vw;
+  border: 1px solid #797585;
+  margin: 25px 0 0 0;
+  background-color: white;
+  padding: 10px 0px 10px 5vw;
+}
+#login .login-container .registerInputContainer input:focus {
+  background-color: white;
 }
 
-.lIcon {
-  left: 3%;
+.eye {
+  position: absolute;
+  right: 4vw;
+  top: 85%;
+  transform: translateY(-85%);
+  cursor: pointer;
+}
+@media (max-width: 770px) {
+  .eye {
+    right: 8vw;
+  }
+}
+
+.mail {
+  position: absolute;
+  left: 3.5vw;
+  top: 85%;
+  transform: translateY(-85%);
+}
+@media (max-width: 770px) {
+  .mail {
+    left: 5vw;
+  }
 }
 
 .key {
-  left: 90%;
-  cursor: pointer;
+  position: absolute;
+  left: 3.5vw;
+  top: 85%;
+  transform: translateY(-85%);
+}
+@media (max-width: 770px) {
+  .key {
+    left: 5vw;
+  }
 }/*# sourceMappingURL=Login.css.map */

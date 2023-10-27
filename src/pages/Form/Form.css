@@ -4,11 +4,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 13vh 0 0 0;
+  padding: 15vh 0 5vh 0;
+  gap: 30px;
 }
-#form form {
+#form h4 {
+  text-align: left;
+  align-self: flex-start;
+  padding: 0 10vw;
+}
+#form .form-container {
+  width: 80vw;
+}
+#form .form-container .form-container-div {
   display: flex;
   flex-direction: column;
-  width: 75vw;
   gap: 30px;
+}
+#form .form-container .form-container-div div {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=Form.css.map */

@@ -36,17 +36,17 @@ export default function Footer() {
               <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Products</h6>
                 <p>
-                  <a href="#">
+                  <a href="/#">
                     HOME
                   </a>
                 </p>
                 <p>
-                  <a href="#about">
+                  <a href="/#about">
                     ABOUT
                   </a>
                 </p>
                 <p>
-                  <a href="#contact">
+                  <a href="/#contact">
                     CONTACT US
                   </a>
                 </p>
@@ -55,17 +55,17 @@ export default function Footer() {
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Resources</h6>
                 <p>
-                  <a href="#">
+                  <a href="/#">
                     BLOG
                   </a>
                 </p>
                 <p>
-                  <a href="#">
+                  <a href="/#">
                     EVENTS
                   </a>
                 </p>
                 <p>
-                  <a href="#">
+                  <a href="/#">
                     PRIVACY POLICY
                   </a>
                 </p>

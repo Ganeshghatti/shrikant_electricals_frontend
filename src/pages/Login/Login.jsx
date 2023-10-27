@@ -38,10 +38,12 @@ const Login = () => {
     if (employeeData.email && employeeData.password) {
       try {
         dispatch(startLoading());
+        console.log("login started")
         const response = await axios.post(
           "https://shrikant-electricals.onrender.com/login",
           employeeData
         );
+        console.log("Login success")
         dispatch(stopLoading());
         const employee = {
           email: response.data.email,
@@ -63,8 +65,8 @@ const Login = () => {
         window.location.href = `/accounts/${username}`;
       } catch (error) {
         dispatch(stopLoading());
-        localStorage.setItem("errormessage",error.response.data)
-        seterrormessage(error.response.data);
+        localStorage.setItem("errormessage",error.message)
+        seterrormessage(error.message);
       }
     } else {
       seterrormessage("Please enter email and password");
