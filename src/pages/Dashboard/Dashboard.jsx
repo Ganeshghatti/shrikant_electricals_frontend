@@ -7,7 +7,8 @@ import Box from "@mui/material/Box";
 import "./Dashboard.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +44,7 @@ function a11yProps(index) {
 }
 
 export default function Dashboard() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const [customerdata, setcustomerdata] = useState([]);
   const [employeedata, setemployeedata] = useState([]);
 
@@ -60,8 +61,9 @@ export default function Dashboard() {
             Authorization: `Bearer ${employee.employee.token}`,
           },
         });
-        setcustomerdata(response.data);
-        console.log(customerdata);
+        console.log(response.data.customersdata)
+        const reversedData = response.data.customersdata.reverse();
+        setcustomerdata(reversedData);
       } catch (error) {
         console.error("Error fetching Customer Data:", error);
       }
@@ -75,15 +77,16 @@ export default function Dashboard() {
             },
           }
         );
+        console.log(response.data);
+
         setemployeedata(response.data.employeesdata);
-        console.log(response.data.employeesdata);
       } catch (error) {
         console.error("Error fetching Employees Data:", error);
       }
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData(value);
   }, [value]);
   return (
@@ -108,7 +111,105 @@ export default function Dashboard() {
           <Tab label="Employees Data" {...a11yProps(1)} />
         </Tabs>
         <TabPanel value={value} index={0}>
-          
+          <section id="formdata">
+            {customerdata.map((item, index) => (
+              <MDBRow className="formdata-div" key={index}>
+                <MDBCol md="4">
+                  <p>
+                    <b>Name :</b>
+                    {item.name}
+                  </p>
+                  <p>
+                    <b>Phone no.</b> : {item.phone}
+                  </p>
+                  <p>
+                    <b>Email : </b>
+                    {item.email}
+                  </p>
+                  <p>
+                    <b>KW/HP : </b>
+                    {item.KW_HP}
+                  </p>
+                  <p>
+                    <b>LT4 / LT5: </b>
+                    {item.LT}
+                  </p>
+                  <p>
+                    <b>Balake: </b>
+                    {item.Balake}
+                  </p>
+                  <p>
+                    <b>Other querries : </b>
+                    {item.query ? item.query : "none"}
+                  </p>
+                </MDBCol>
+                <MDBCol md="8">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <a href={item.NeighboursBill}>
+                      <img
+                        src={item.NeighboursBill}
+                        alt="NeighboursBill"
+                        className="formdata-img"
+                      />
+                      <p style={{ textAlign: "center" }}>NeighboursBill</p>
+                    </a>
+                    <a href={item.BorewellCertificate}>
+                      <img
+                        src={item.BorewellCertificate}
+                        alt="BorewellCertificate"
+                        className="formdata-img"
+                      />
+                      <p style={{ textAlign: "center" }}>BorewellCertificate</p>
+                    </a>
+                    <a href={item.AADHARCard}>
+                      <img
+                        src={item.AADHARCard}
+                        alt="AADHARCard"
+                        className="formdata-img"
+                      />
+                      <p style={{ textAlign: "center" }}>AADHARCard</p>
+                    </a>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <a href={item.RTC}>
+                      <img src={item.RTC} alt="RTC" className="formdata-img" />
+                      <p style={{ textAlign: "center" }}>RTC</p>
+                    </a>
+                    <a href={item.BorewellCertificate}>
+                      <img
+                        src={item.BorewellCertificate}
+                        alt="BorewellCertificate"
+                        className="formdata-img"
+                      />
+                      <p style={{ textAlign: "center" }}>BorewellCertificate</p>
+                    </a>
+                    <a href={item.TaxReceipt}>
+                      <img
+                        src={item.TaxReceipt}
+                        alt="TaxReceipt"
+                        className="formdata-img"
+                      />
+                      <p style={{ textAlign: "center" }}>TaxReceipt</p>
+                    </a>
+                  </div>
+                </MDBCol>
+              </MDBRow>
+            ))}
+          </section>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <section id="employees-details">

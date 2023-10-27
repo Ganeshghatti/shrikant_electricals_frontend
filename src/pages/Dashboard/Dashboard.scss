@@ -14,7 +14,20 @@
   flex-direction: column;
   flex-direction: row;
   flex-wrap: wrap;
-  .employees-div{
+  .employees-div {
     width: 350px;
+  }
+}
+#formdata {
+  width: 80vw;
+  .formdata-div {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;    padding: 20px 0;
+    margin-bottom: 80px;
+    .formdata-img {
+      width: 200px !important;
+      object-fit: cover;
+      height: 200px;
+      padding: 15px;
+    }
   }
 }

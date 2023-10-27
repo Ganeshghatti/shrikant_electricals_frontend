@@ -18,7 +18,7 @@ const Form = () => {
     NeighboursBill: "",
     BorewellCertificate: "",
     RTC: "",
-    balake: "",
+    Balake: "",
     KW_HP: "",
     LT: "",
     name: "",
@@ -64,10 +64,8 @@ const Form = () => {
         uploadBytes(storageRef, file)
           .then((snapshot) => getDownloadURL(snapshot.ref))
           .then((downloadURL) => {
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              [documentName]: downloadURL,
-            }));
+            console.log(downloadURL)
+            setFormData({ ...FormData, [documentName]: downloadURL });
             console.log(formData);
           })
           .catch((error) => {
@@ -102,6 +100,7 @@ const Form = () => {
   };
   const sendFormDataToBackend = async (data) => {
     try {
+      console.log(data)
       const response = await axios.post("http://localhost:5000/form", data);
       console.log(response);
     } catch (error) {
@@ -116,6 +115,7 @@ const Form = () => {
       [name]: value,
     });
   };
+  
   const buttonstyle = {
     backgroundColor: "#F2CD14",
     color: "black",
@@ -175,7 +175,7 @@ const Form = () => {
             <label htmlFor="balake">Choose Balake:</label>
             <select
               name="balake"
-              value={formData.balake}
+              value={formData.Balake}
               onChange={handleInputChange}
               style={{width:"250px" , padding:"15px"}}
             >

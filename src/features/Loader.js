@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const loadingSlice = createSlice({
-  name: 'loading',
-  initialState:{
-    isLoading:false
+  name: "loading",
+  initialState: {
+    isLoading: false,
   },
   reducers: {
     startLoading: (state) => {
@@ -18,3 +18,7 @@ export const loadingSlice = createSlice({
 export const { startLoading, stopLoading } = loadingSlice.actions;
 
 export default loadingSlice.reducer;
+// setFormData((prevFormData) => ({
+//   ...prevFormData,
+//   [documentName]: downloadURL,
+// }));

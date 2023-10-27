@@ -9,7 +9,6 @@ export default function AdminRoute({ children }) {
   useEffect(() => {
     const admincheck = async () => {
       try {
-        console.log(employee);
         const response = await axios.post(
           "http://localhost:5000/checkadmin",
           { employee },
@@ -19,7 +18,6 @@ export default function AdminRoute({ children }) {
             },
           }
         );
-        console.log(response.data.isadmin);
         const isAdmin = response.data.isadmin;
         setisadmin(isAdmin);
       } catch (error) {
