@@ -7,10 +7,13 @@ import axios from "axios";
 import moment from "moment";
 import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import TextField from "@mui/material/TextField";
+import { startLoading, stopLoading } from "../../features/Loader";
+import { useDispatch } from "react-redux";
 
 const storage = getStorage(app);
 
 const Form = () => {
+  const dispatch = useDispatch();
   const [formData, setformData] = useState({
     Balake: "",
     KW_HP: "",
@@ -120,12 +123,35 @@ const Form = () => {
 
     try {
       console.log("data being sent to backend", formData, imageURLs);
-      const response = await axios.post("https://shrikant-electricals.onrender.com/form", {
-        ...formData,
-        imageURLs: imageURLs,
-      });
-      console.log(response);
+      dispatch(startLoading());
+      const response = await axios.post(
+        "https://shrikant-electricals.onrender.com/form",
+        {
+          ...formData,
+          imageURLs: imageURLs,
+        }
+      );
+      dispatch(stopLoading());
+      if (response.status === 200) {
+        setformData({
+          Balake: "",
+          KW_HP: "",
+          LT: "",
+          name: "",
+          email: "",
+          phoneNumber: "",
+          query: "",
+        });
+  
+        setNOCimg({ img: null, name: null });
+        setTaxReceiptimg({ img: null, name: null });
+        setAADHARCardimg({ img: null, name: null });
+        setNeighboursBillimg({ img: null, name: null });
+        setBorewellCertificateimg({ img: null, name: null });
+        setRTCimg({ img: null, name: null });
+      }
     } catch (error) {
+      dispatch(stopLoading());
       console.log(error.message);
     }
   };
@@ -144,7 +170,9 @@ const Form = () => {
   };
   return (
     <section id="form">
-      <h4>Enter your data</h4>
+      <h4>
+        Enter your data
+      </h4>
       <MDBRow className="form-container">
         <MDBCol md="6" className="form-container-div">
           <TextField
@@ -168,7 +196,11 @@ const Form = () => {
             }}
           />
         </MDBCol>
-        <MDBCol md="6" className="form-container-div">
+        <MDBCol
+          md="6"
+          className="form-container-div"
+          style={{ marginTop: window.innerWidth < 770 ? "20px" : "0" }}
+        >
           <TextField
             id="outlined-required"
             name="phoneNumber"
@@ -210,7 +242,11 @@ const Form = () => {
             </select>
           </div>
         </MDBCol>
-        <MDBCol md="6" className="form-container-div">
+        <MDBCol
+          md="6"
+          className="form-container-div"
+          style={{ marginTop: window.innerWidth < 770 ? "20px" : "0" }}
+        >
           <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
             <label>Choose:</label>
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -282,7 +318,11 @@ const Form = () => {
             />
           </div>
         </MDBCol>
-        <MDBCol md="6" className="form-container-div">
+        <MDBCol
+          md="6"
+          className="form-container-div"
+          style={{ marginTop: window.innerWidth < 770 ? "20px" : "0" }}
+        >
           <div>
             <label htmlFor="AADHARCard">AADHAR Card:</label>
             <input

@@ -10,18 +10,21 @@
   align-items: center;
   padding: 15vh 0 5vh 0;
   gap: 30px;
-  h4{
+  h4 {
     text-align: left;
     align-self: flex-start;
     padding: 0 10vw;
-
+    @media (max-width: 770px) {
+      text-align: center ;
+      align-self: center;
+    }
   }
   .form-container {
     width: 80vw;
     .form-container-div {
       @include flex(column);
       gap: 30px;
-      div{
+      div {
         @include flex(column);
       }
     }
