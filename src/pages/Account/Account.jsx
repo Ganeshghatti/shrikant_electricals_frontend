@@ -55,6 +55,7 @@ export default function Account() {
   const [value, setValue] = React.useState(0);
   const [load, setload] = useState(false);
   const [attendancemarked, setattendancemarked] = useState(true);
+  const [last7Attendence, setLast7Attendence] = useState([]);
   const [accountdetails, setaccountdetails] = useState({
     first_name: "",
     last_name: "",
@@ -89,7 +90,9 @@ export default function Account() {
           );
           setaccountdetails(response.data);
           setload(true);
-          console.log(response.data.user.Attendence);
+          const last7 = [...response.data.user.Attendence.slice(-7)].reverse();
+          setLast7Attendence(last7);
+          console.log(last7);
           console.log(
             response.data.user.Attendence[
               response.data.user.Attendence.length - 1
@@ -97,9 +100,9 @@ export default function Account() {
           );
           console.log(currentDay);
           if (
-            (response.data.user.Attendence[
+            response.data.user.Attendence[
               response.data.user.Attendence.length - 1
-            ].day !== currentDay)
+            ].day !== currentDay
           ) {
             setattendancemarked(false);
           }
@@ -183,16 +186,46 @@ export default function Account() {
                 </>
               )}
               <div>
-                <h1>This Week Stats</h1>
-                <Button variant="contained" style={buttonstyle}>
-                  Click here!
-                </Button>
-              </div>
-              <div>
-                <h1>This Month Stats</h1>
-                <Button variant="contained" style={buttonstyle}>
-                  Click here!
-                </Button>
+                <h1>Last 7 Days</h1>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    overflowX: "auto",
+                    gap: "15px",
+                    boxShadow:"none"
+                  }}
+                >
+                  {last7Attendence &&
+                    last7Attendence.map((item, index) =>
+                      item.day === "Sunday" || item.day === "Saturday" ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            backgroundColor: "white",
+                            alignItems:"center",
+                            justifyContent:"center"
+                          }}
+                        >
+                          <h6 style={{ color: "black" }}>{item.day}</h6>
+                          <p style={{ color: "black" }}>{item.date}</p>
+                        </div>
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            backgroundColor: item.isPresent ? "green" : "red",
+                          }}
+                        >
+                          <h6 style={{ color: "white" }}>{item.day}</h6>
+                          <p style={{ color: "white" }}>{item.date}</p>
+                        </div>
+                      )
+                    )}
+                </div>
               </div>
             </section>
           </CustomTabPanel>

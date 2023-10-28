@@ -65,7 +65,7 @@ const Login = () => {
         window.location.href = `/accounts/${username}`;
       } catch (error) {
         dispatch(stopLoading());
-        localStorage.setItem("errormessage",error.message)
+        localStorage.setItem("errormessage","Wrong email or password")
         seterrormessage(error.message);
       }
     } else {

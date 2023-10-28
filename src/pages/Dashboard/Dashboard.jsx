@@ -9,7 +9,12 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import moment from "moment";
+// import { PieChart } from "react-minimal-pie-chart";
 
+const localizer = momentLocalizer(moment);
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -61,7 +66,6 @@ export default function Dashboard() {
             Authorization: `Bearer ${employee.employee.token}`,
           },
         });
-        console.log(response.data.customersdata)
         const reversedData = response.data.customersdata.reverse();
         setcustomerdata(reversedData);
       } catch (error) {
@@ -120,7 +124,7 @@ export default function Dashboard() {
                     {item.name}
                   </p>
                   <p>
-                    <b>Phone no.</b> : {item.phone}
+                    <b>Phone no</b> : {item.phone}
                   </p>
                   <p>
                     <b>Email : </b>
@@ -214,44 +218,98 @@ export default function Dashboard() {
         <TabPanel value={value} index={1}>
           <section id="employees-details">
             {employeedata.map((item, index) => (
-              <div className="employees-div">
-                <h5 style={{ fontWeight: "900", padding: "20px 0" }}>
+              <MDBRow className="employees-div">
+                <h5
+                  style={{
+                    fontWeight: "900",
+                    padding: "20px 0",
+                    textAlign: "center",
+                  }}
+                >
                   {item.first_name} &nbsp;
                   {item.last_name}
                 </h5>
-                <p>
-                  <b>Id: </b>
-                  {item._id}
-                </p>
-                <p>
-                  <b>Email: </b>
-                  {item.email}
-                </p>
-                <p>
-                  <b>Password: </b>
-                  {item.password}
-                </p>
-                <p>
-                  <b>Gender: </b>
-                  {item.gender}
-                </p>
-                <p>
-                  <b>Salary: </b>
-                  {item.Salary}
-                </p>
-                <p>
-                  <b>EPF: </b>
-                  {item.EPF}
-                </p>
-                <p>
-                  <b>ESI: </b>
-                  {item.ESI}
-                </p>
-                <p>
-                  <b>Tenure: </b>
-                  {item.Tenure}
-                </p>
-              </div>
+                <MDBCol md="6">
+                  <div>
+                    <p>
+                      <b>Id: </b>
+                      {item._id}
+                    </p>
+                    <p>
+                      <b>Email: </b>
+                      {item.email}
+                    </p>
+                    <p>
+                      <b>Password: </b>
+                      {item.password}
+                    </p>
+                    <p>
+                      <b>Gender: </b>
+                      {item.gender}
+                    </p>
+                    <p>
+                      <b>Salary: </b>
+                      {item.Salary}
+                    </p>
+                    <p>
+                      <b>EPF: </b>
+                      {item.EPF}
+                    </p>
+                    <p>
+                      <b>ESI: </b>
+                      {item.ESI}
+                    </p>
+                    <p>
+                      <b>Tenure: </b>
+                      {item.Tenure}
+                    </p>
+                  </div>
+                  {/* <div style={{width:"75%"}}>
+                    <PieChart
+                      data={[
+                        { title: "One", value: 10, color: "#E38627" },
+                        { title: "Two", value: 15, color: "#C13C37" },
+                      ]}
+                    />
+                  </div> */}
+                </MDBCol>
+                <MDBCol md="6">
+                  <Calendar
+                    localizer={localizer}
+                    events={item.Attendence.map((event, eventIndex) => ({
+                      ...event,
+                      start: event.date,
+                      end: event.date,
+                      isPresent: event.isPresent,
+                    }))}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ width: 400, height: 500 }}
+                    views={["month"]} // Show only the "Month" view
+                    eventPropGetter={(event) => {
+                      if (event.isPresent === true) {
+                        return {
+                          style: {
+                            backgroundColor: "green",
+                          },
+                        };
+                      } else if (event.isPresent === false) {
+                        return {
+                          style: {
+                            backgroundColor: "red",
+                          },
+                        };
+                      } else {
+                        return {
+                          style: {
+                            backgroundColor: "white",
+                          },
+                        };
+                      }
+                    }}
+                  />
+                </MDBCol>
+              </MDBRow>
             ))}
           </section>
         </TabPanel>

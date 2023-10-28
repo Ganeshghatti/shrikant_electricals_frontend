@@ -12,10 +12,46 @@
 #employees-details {
   width: 80vw;
   display: flex;
+  border: 2px solid red;
   flex-direction: column;
-  flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
 }
 #employees-details .employees-div {
-  width: 350px;
+  width: 80%;
+  box-shadow: rgba(1, 143, 220, 0.779) 0px 3px 8px !important;
+  padding: 1rem;
+}
+
+#formdata {
+  width: 80vw;
+}
+#formdata .formdata-div {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+  padding: 20px 0;
+  margin-bottom: 80px;
+}
+#formdata .formdata-div .formdata-img {
+  width: 200px !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
+  padding: 15px;
+}
+
+.present-day {
+  background-color: green; /* Change to your desired green color */
+}
+
+.absent-day {
+  background-color: red; /* Change to your desired red color */
+}
+
+.custom-day {
+  background-color: red;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }/*# sourceMappingURL=Dashboard.css.map */

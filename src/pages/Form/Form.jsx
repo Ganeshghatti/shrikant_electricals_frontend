@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Children } from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app } from "../../config/Firebase";
 import "./Form.scss";
@@ -11,13 +11,7 @@ import TextField from "@mui/material/TextField";
 const storage = getStorage(app);
 
 const Form = () => {
-  const [formData, setFormData] = useState({
-    NOC: "",
-    TaxReceipt: "",
-    AADHARCard: "",
-    NeighboursBill: "",
-    BorewellCertificate: "",
-    RTC: "",
+  const [formData, setformData] = useState({
     Balake: "",
     KW_HP: "",
     LT: "",
@@ -26,82 +20,110 @@ const Form = () => {
     phoneNumber: "",
     query: "",
   });
-  const [NOC, setNOC] = useState(null);
-  const [TaxReceipt, setTaxReceipt] = useState(null);
-  const [AADHARCard, setAADHARCard] = useState(null);
-  const [NeighboursBill, setNeighboursBill] = useState(null);
-  const [BorewellCertificate, setBorewellCertificate] = useState(null);
-  const [RTC, setRTC] = useState(null);
-  const [submitClicked, setSubmitClicked] = useState(false);
+  const [NOCimg, setNOCimg] = useState({
+    img: null,
+    name: null,
+  });
+  const [TaxReceiptimg, setTaxReceiptimg] = useState({
+    img: null,
+    name: null,
+  });
+  const [AADHARCardimg, setAADHARCardimg] = useState({
+    img: null,
+    name: null,
+  });
+  const [NeighboursBillimg, setNeighboursBillimg] = useState({
+    img: null,
+    name: null,
+  });
+  const [BorewellCertificateimg, setBorewellCertificateimg] = useState({
+    img: null,
+    name: null,
+  });
+  const [RTCimg, setRTCimg] = useState({
+    img: null,
+    name: null,
+  });
+  const images = [
+    NOCimg,
+    TaxReceiptimg,
+    AADHARCardimg,
+    NeighboursBillimg,
+    BorewellCertificateimg,
+    RTCimg,
+  ];
 
-  const handleFileChange = (e, stateSetter) => {
-    stateSetter(e.target.files[0]);
-  };
+  const imageURLs = {};
 
-  const handleSubmit = () => {
-    const filesToUpload = [
-      NOC,
-      TaxReceipt,
-      AADHARCard,
-      NeighboursBill,
-      BorewellCertificate,
-      RTC,
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const requiredFields = [
+      "Balake",
+      "KW_HP",
+      "LT",
+      "name",
+      "email",
+      "phoneNumber",
     ];
-    if (filesToUpload.some((file) => file === null)) {
-      console.error("Please select all images.");
+    const emptyFields = [];
+
+    requiredFields.forEach((field) => {
+      if (formData[field] === "") {
+        emptyFields.push(field);
+      }
+    });
+
+    if (emptyFields.length > 0) {
+      const emptyFieldNames = emptyFields.map((field) => {
+        if (field === "Balake") {
+          return "Balake Field";
+        } else if (field === "KW_HP") {
+          return "KW/HP Field";
+        }
+        return field;
+      });
+
+      const errorMessage = `Please fill in the following fields: ${emptyFieldNames.join(
+        ", "
+      )}`;
+      alert(errorMessage);
       return;
     }
-
-    const promises = [];
+    if (
+      NOCimg.img === null ||
+      TaxReceiptimg.img === null ||
+      AADHARCardimg.img === null ||
+      NeighboursBillimg.img === null ||
+      BorewellCertificateimg.img == null ||
+      RTCimg.img === null
+    ) {
+      alert("Please upload all images");
+      return;
+    }
     const time = moment().format("MMMM Do YYYY, h:mm:ss a");
-
-    const uploadImage = (documentName, file) => {
+    for (let i = 0; i < 6; i++) {
       const storageRef = ref(
         storage,
-        `images/${formData.name}/${time}/${documentName}/${file.name}`
+        `images/${formData.name}/${time}/${images[i].name}/${images[i].img.name}`
       );
-      promises.push(
-        uploadBytes(storageRef, file)
-          .then((snapshot) => getDownloadURL(snapshot.ref))
-          .then((downloadURL) => {
-            console.log(downloadURL)
-            setFormData({ ...FormData, [documentName]: downloadURL });
-            console.log(formData);
-          })
-          .catch((error) => {
-            console.error(`Error uploading ${documentName}:`, error);
-          })
-      );
-    };
-
-    for (let i = 0; i < filesToUpload.length; i++) {
-      const file = filesToUpload[i];
-      uploadImage(
-        [
-          "NOC",
-          "TaxReceipt",
-          "AADHARCard",
-          "NeighboursBill",
-          "BorewellCertificate",
-          "RTC",
-        ][i],
-        file
-      );
+      await uploadBytes(storageRef, images[i].img)
+        .then((snapshot) => getDownloadURL(snapshot.ref))
+        .then((downloadURL) => {
+          console.log(images[i].name, downloadURL);
+          imageURLs[images[i].name] = downloadURL;
+          console.log(imageURLs);
+        })
+        .catch((error) => {
+          console.error(`Error uploading ${images[i].name}:`, error);
+        });
     }
 
-    Promise.all(promises)
-      .then(() => {
-        setSubmitClicked(true);
-        sendFormDataToBackend(formData);
-      })
-      .catch((error) => {
-        console.error("Error uploading images:", error);
-      });
-  };
-  const sendFormDataToBackend = async (data) => {
     try {
-      console.log(data)
-      const response = await axios.post("http://localhost:5000/form", data);
+      console.log("data being sent to backend", formData, imageURLs);
+      const response = await axios.post("http://localhost:5000/form", {
+        ...formData,
+        imageURLs: imageURLs,
+      });
       console.log(response);
     } catch (error) {
       console.log(error.message);
@@ -110,12 +132,12 @@ const Form = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
+    setformData({
       ...formData,
       [name]: value,
     });
   };
-  
+
   const buttonstyle = {
     backgroundColor: "#F2CD14",
     color: "black",
@@ -167,6 +189,7 @@ const Form = () => {
             label="Number of KW/HP"
             value={formData.KW_HP}
             onChange={handleInputChange}
+            type="number"
             InputProps={{
               startAdornment: <div style={{ marginRight: "20px" }} />,
             }}
@@ -174,10 +197,10 @@ const Form = () => {
           <div>
             <label htmlFor="balake">Choose Balake:</label>
             <select
-              name="balake"
+              name="Balake"
               value={formData.Balake}
               onChange={handleInputChange}
-              style={{width:"250px" , padding:"15px"}}
+              style={{ width: "250px", padding: "15px" }}
             >
               <option value={null}>Select an option</option>
               <option value="Graha balake">Graha balake</option>
@@ -188,7 +211,7 @@ const Form = () => {
           </div>
         </MDBCol>
         <MDBCol md="6" className="form-container-div">
-          <div style={{ display: "flex", flexDirection: "row",gap:"20px" }}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
             <label>Choose:</label>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <input
@@ -216,12 +239,18 @@ const Form = () => {
       <h4>Upload Required Documents here</h4>
       <MDBRow className="form-container">
         <MDBCol md="6" className="form-container-div">
-          <div style={{width:"60%"}}>
+          <div style={{ width: "60%" }}>
             <label htmlFor="TaxReceipt">Tax Receipt:</label>
             <input
               type="file"
               id="TaxReceipt"
-              onChange={(e) => handleFileChange(e, setTaxReceipt)}
+              name="TaxReceipt"
+              onChange={(e) => {
+                setTaxReceiptimg({
+                  img: e.target.files[0],
+                  name: e.target.name,
+                });
+              }}
             />
           </div>
           <div>
@@ -229,15 +258,27 @@ const Form = () => {
             <input
               type="file"
               id="NOC"
-              onChange={(e) => handleFileChange(e, setNOC)}
+              name="NOC"
+              onChange={(e) => {
+                setNOCimg({
+                  img: e.target.files[0],
+                  name: e.target.name,
+                });
+              }}
             />
           </div>
           <div>
             <label htmlFor="BorewellCertificate">Borewell Certificate:</label>
             <input
               type="file"
+              name="BorewellCertificate"
               id="BorewellCertificate"
-              onChange={(e) => handleFileChange(e, setBorewellCertificate)}
+              onChange={(e) => {
+                setBorewellCertificateimg({
+                  img: e.target.files[0],
+                  name: e.target.name,
+                });
+              }}
             />
           </div>
         </MDBCol>
@@ -247,7 +288,13 @@ const Form = () => {
             <input
               type="file"
               id="AADHARCard"
-              onChange={(e) => handleFileChange(e, setAADHARCard)}
+              name="AADHARCard"
+              onChange={(e) => {
+                setAADHARCardimg({
+                  img: e.target.files[0],
+                  name: e.target.name,
+                });
+              }}
             />
           </div>
           <div>
@@ -255,15 +302,27 @@ const Form = () => {
             <input
               type="file"
               id="NeighboursBill"
-              onChange={(e) => handleFileChange(e, setNeighboursBill)}
+              name="NeighboursBill"
+              onChange={(e) => {
+                setNeighboursBillimg({
+                  img: e.target.files[0],
+                  name: e.target.name,
+                });
+              }}
             />
           </div>
           <div>
             <label htmlFor="RTC">RTC:</label>
             <input
               type="file"
+              name="RTC"
               id="RTC"
-              onChange={(e) => handleFileChange(e, setRTC)}
+              onChange={(e) => {
+                setRTCimg({
+                  img: e.target.files[0],
+                  name: e.target.name,
+                });
+              }}
             />
           </div>
         </MDBCol>
