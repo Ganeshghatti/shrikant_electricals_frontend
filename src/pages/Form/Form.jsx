@@ -9,6 +9,7 @@ import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import TextField from "@mui/material/TextField";
 import { startLoading, stopLoading } from "../../features/Loader";
 import { useDispatch } from "react-redux";
+import { startLoading, stopLoading } from "../../features/Loader";
 
 const storage = getStorage(app);
 
@@ -103,6 +104,8 @@ const Form = () => {
       alert("Please upload all images");
       return;
     }
+    dispatch(startLoading());
+
     const time = moment().format("MMMM Do YYYY, h:mm:ss a");
     for (let i = 0; i < 6; i++) {
       const storageRef = ref(
@@ -149,8 +152,14 @@ const Form = () => {
         setNeighboursBillimg({ img: null, name: null });
         setBorewellCertificateimg({ img: null, name: null });
         setRTCimg({ img: null, name: null });
+        dispatch(stopLoading());
+        window.location.href='/'
+        alert("Form Submission Successful !! Our team will contact you as soon as possible")
+
       }
     } catch (error) {
+      dispatch(stopLoading());
+
       dispatch(stopLoading());
       console.log(error.message);
     }

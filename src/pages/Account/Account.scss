@@ -25,7 +25,7 @@
     gap: 50px;
     margin: auto;
     @include flex(column);
-    padding: 5vh 5vw 5vh 5vw;
+    padding: 5vh 0;
     justify-content: center;
     div {
       box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
