@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import "./Admin.scss";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export default function Admin() {
   const [password, setPassword] = useState("");
   const [error, seterror] = useState("");
+  const dispatch = useDispatch();
 
   const buttonstyle = {
     backgroundColor: "#333333",
@@ -14,6 +16,7 @@ export default function Admin() {
 
   const handleSubmit = () => {
     if (password == "admin") {
+      localStorage.setItem("isadmin", true);
       window.location.href = `/dashboard`;
     } else {
       seterror("Wrong password");
@@ -28,7 +31,7 @@ export default function Admin() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <p style={{fontWeight:"900",color:"red"}}>{error}</p>
+      <p style={{ fontWeight: "900", color: "red" }}>{error}</p>
       <Button
         variant="contained"
         style={buttonstyle}

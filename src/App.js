@@ -25,6 +25,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   const employee = JSON.parse(localStorage.getItem("employee"));
+
   let { isLoading } = useSelector((state) => state.loading);
 
   useEffect(() => {

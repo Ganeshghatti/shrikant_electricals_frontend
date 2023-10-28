@@ -12,12 +12,15 @@ import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 // import { PieChart } from "react-minimal-pie-chart";
 
 const localizer = momentLocalizer(moment);
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+  const dispatch = useDispatch();
   return (
     <div
       role="tabpanel"
@@ -58,14 +61,19 @@ export default function Dashboard() {
   };
   const employee = useSelector((state) => state.employee);
 
+  const adminflag = localStorage.getItem("isadmin");
+
   const fetchData = async (tabIndex) => {
     if (tabIndex === 0) {
       try {
-        const response = await axios.get(`https://shrikant-electricals.onrender.com/getformdata`, {
-          headers: {
-            Authorization: `Bearer ${employee.employee.token}`,
-          },
-        });
+        const response = await axios.get(
+          `https://shrikant-electricals.onrender.com/getformdata`,
+          {
+            headers: {
+              Authorization: `Bearer ${employee.employee.token}`,
+            },
+          }
+        );
         const reversedData = response.data.customersdata.reverse();
         setcustomerdata(reversedData);
       } catch (error) {
@@ -93,7 +101,8 @@ export default function Dashboard() {
   useEffect(() => {
     fetchData(value);
   }, [value]);
-  return (
+
+  return adminflag ? (
     <section id="dashboard">
       <Box
         sx={{
@@ -117,8 +126,16 @@ export default function Dashboard() {
         <TabPanel value={value} index={0}>
           <section id="formdata">
             {customerdata.map((item, index) => (
-              <MDBRow className="formdata-div" key={index}>
-                <MDBCol md="4">
+              <div className="formdata-div" key={index}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignContent: "center",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    padding:"3vh 5vw"
+                  }}
+                >
                   <p>
                     <b>Name :</b>
                     {item.name}
@@ -146,72 +163,63 @@ export default function Dashboard() {
                     <b>Other querries : </b>
                     {item.query ? item.query : "none"}
                   </p>
-                </MDBCol>
-                <MDBCol md="8">
-                  <div
-                    style={{
-                      display: "flex",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <a href={item.NeighboursBill}>
-                      <img
-                        src={item.NeighboursBill}
-                        alt="NeighboursBill"
-                        className="formdata-img"
-                      />
-                      <p style={{ textAlign: "center" }}>NeighboursBill</p>
-                    </a>
-                    <a href={item.BorewellCertificate}>
-                      <img
-                        src={item.BorewellCertificate}
-                        alt="BorewellCertificate"
-                        className="formdata-img"
-                      />
-                      <p style={{ textAlign: "center" }}>BorewellCertificate</p>
-                    </a>
-                    <a href={item.AADHARCard}>
-                      <img
-                        src={item.AADHARCard}
-                        alt="AADHARCard"
-                        className="formdata-img"
-                      />
-                      <p style={{ textAlign: "center" }}>AADHARCard</p>
-                    </a>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <a href={item.RTC}>
-                      <img src={item.RTC} alt="RTC" className="formdata-img" />
-                      <p style={{ textAlign: "center" }}>RTC</p>
-                    </a>
-                    <a href={item.BorewellCertificate}>
-                      <img
-                        src={item.BorewellCertificate}
-                        alt="BorewellCertificate"
-                        className="formdata-img"
-                      />
-                      <p style={{ textAlign: "center" }}>BorewellCertificate</p>
-                    </a>
-                    <a href={item.TaxReceipt}>
-                      <img
-                        src={item.TaxReceipt}
-                        alt="TaxReceipt"
-                        className="formdata-img"
-                      />
-                      <p style={{ textAlign: "center" }}>TaxReceipt</p>
-                    </a>
-                  </div>
-                </MDBCol>
-              </MDBRow>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    width: "100%",
+                    flexWrap:"wrap",
+                  }}
+                >
+                  <a href={item.NeighboursBill}>
+                    <img
+                      src={item.NeighboursBill}
+                      alt="NeighboursBill"
+                      className="formdata-img"
+                    />
+                    <p style={{ textAlign: "center" }}>NeighboursBill</p>
+                  </a>
+                  <a href={item.BorewellCertificate}>
+                    <img
+                      src={item.BorewellCertificate}
+                      alt="BorewellCertificate"
+                      className="formdata-img"
+                    />
+                    <p style={{ textAlign: "center" }}>BorewellCertificate</p>
+                  </a>
+                  <a href={item.AADHARCard}>
+                    <img
+                      src={item.AADHARCard}
+                      alt="AADHARCard"
+                      className="formdata-img"
+                    />
+                    <p style={{ textAlign: "center" }}>AADHARCard</p>
+                  </a>
+                  <a href={item.RTC}>
+                    <img src={item.RTC} alt="RTC" className="formdata-img" />
+                    <p style={{ textAlign: "center" }}>RTC</p>
+                  </a>
+                  <a href={item.BorewellCertificate}>
+                    <img
+                      src={item.BorewellCertificate}
+                      alt="BorewellCertificate"
+                      className="formdata-img"
+                    />
+                    <p style={{ textAlign: "center" }}>BorewellCertificate</p>
+                  </a>
+                  <a href={item.TaxReceipt}>
+                    <img
+                      src={item.TaxReceipt}
+                      alt="TaxReceipt"
+                      className="formdata-img"
+                    />
+                    <p style={{ textAlign: "center" }}>TaxReceipt</p>
+                  </a>
+                </div>
+              </div>
             ))}
           </section>
         </TabPanel>
@@ -222,7 +230,7 @@ export default function Dashboard() {
                 <h5
                   style={{
                     fontWeight: "900",
-                    padding: "20px 0",
+                    padding: "40px 0",
                     textAlign: "center",
                   }}
                 >
@@ -230,7 +238,15 @@ export default function Dashboard() {
                   {item.last_name}
                 </h5>
                 <MDBCol md="6">
-                  <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignContent: "center",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      height: "100%",
+                    }}
+                  >
                     <p>
                       <b>Id: </b>
                       {item._id}
@@ -265,13 +281,13 @@ export default function Dashboard() {
                     </p>
                   </div>
                   {/* <div style={{width:"75%"}}>
-                    <PieChart
-                      data={[
-                        { title: "One", value: 10, color: "#E38627" },
-                        { title: "Two", value: 15, color: "#C13C37" },
-                      ]}
-                    />
-                  </div> */}
+                  <PieChart
+                    data={[
+                      { title: "One", value: 10, color: "#E38627" },
+                      { title: "Two", value: 15, color: "#C13C37" },
+                    ]}
+                  />
+                </div> */}
                 </MDBCol>
                 <MDBCol md="6">
                   <Calendar
@@ -284,8 +300,8 @@ export default function Dashboard() {
                     }))}
                     startAccessor="start"
                     endAccessor="end"
-                    style={{ width: 400, height: 500 }}
-                    views={["month"]} // Show only the "Month" view
+                    style={{ width: "100%", height: 350 }}
+                    views={["month"]}
                     eventPropGetter={(event) => {
                       if (event.isPresent === true) {
                         return {
@@ -314,6 +330,23 @@ export default function Dashboard() {
           </section>
         </TabPanel>
       </Box>
+    </section>
+  ) : (
+    <section
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <h1>404 - Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+      <Link to="/">
+        <Button variant="contained">Back</Button>
+      </Link>
     </section>
   );
 }

@@ -18,7 +18,4 @@ export const loadingSlice = createSlice({
 export const { startLoading, stopLoading } = loadingSlice.actions;
 
 export default loadingSlice.reducer;
-// setFormData((prevFormData) => ({
-//   ...prevFormData,
-//   [documentName]: downloadURL,
-// }));
+

@@ -64,7 +64,9 @@ export default function Navbar() {
                 }}
               >
                 <h5 className="loggedinash5">{employee && "Logged in as"}</h5>
-                <h5 className="loggedinash5">{employee && employee.employee.email}</h5>
+                <h5 className="loggedinash5">
+                  {employee && employee.employee.email}
+                </h5>
                 {employee && (
                   <Button
                     variant="contained"
@@ -114,10 +116,10 @@ export default function Navbar() {
                   alignItems: "center",
                 }}
               >
+                <h5 className="loggedinash5">{employee && "Logged in as"}</h5>
                 <h5 className="loggedinash5">
-                  {employee && "Logged in as"}
+                  {employee && employee.employee.email}
                 </h5>
-                <h5 className="loggedinash5">{employee && employee.employee.email}</h5>
               </div>
 
               {employee && (

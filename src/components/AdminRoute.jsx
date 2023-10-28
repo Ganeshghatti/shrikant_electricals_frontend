@@ -48,5 +48,6 @@ export default function AdminRoute({ children }) {
         </section>
       );
     }
+
     return children;
 }
