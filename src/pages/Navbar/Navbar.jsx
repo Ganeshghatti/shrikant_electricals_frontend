@@ -88,7 +88,9 @@ export default function Navbar() {
         </>
       ) : null}
 
+      <a href="/#hero">
       <img src={logo} className="nav-logo-img" />
+      </a>
       {window.innerWidth > 700 ? (
         <>
           <ul>

@@ -9,7 +9,6 @@ import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import TextField from "@mui/material/TextField";
 import { startLoading, stopLoading } from "../../features/Loader";
 import { useDispatch } from "react-redux";
-import { startLoading, stopLoading } from "../../features/Loader";
 
 const storage = getStorage(app);
 
