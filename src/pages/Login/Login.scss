@@ -14,7 +14,7 @@
     justify-content: center;
     gap: 10px;
     @media (max-width: 770px) {
-      width: 60vw;
+      width: 90vw;
     }
     .registerInputContainer {
       display: flex;
@@ -35,6 +35,10 @@
         padding: 10px 0px 10px 5vw;
         &:focus {
           background-color: white;
+        }
+        @media (max-width: 770px) {
+          padding: 10px 0px 10px 10vw;
+          font-size: 14px;
         }
       }
     }

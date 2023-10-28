@@ -7,6 +7,7 @@ import {
   MDBCol,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import logo from "./logo.png";
 
 export default function Footer() {
   return (
@@ -24,7 +25,7 @@ export default function Footer() {
             <MDBRow className="mt-3">
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
                 <img
-                  src="./Assets/Images/logo.png"
+                  src={logo}
                   alt="Custom Icon"
                   className="me-3"
                   style={{ width: "75px" }}

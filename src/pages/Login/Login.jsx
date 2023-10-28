@@ -76,7 +76,7 @@ const Login = () => {
     <section id="login">
       <div className="login-container">
         <div className="registerInputContainer">
-          <img src={mail} alt="" className="mail" style={{ width: "2.25vw" }} />
+          <img src={mail} alt="" className="mail" style={{ width: "30px" }} />
           <input
             type="text"
             placeholder="Enter Your Email"
@@ -86,7 +86,7 @@ const Login = () => {
         </div>
 
         <div className="registerInputContainer">
-          <img src={key} alt="" className="key" style={{ width: "2.25vw" }} />
+          <img src={key} alt="" className="key" style={{ width: "30px" }} />
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Enter Password"
@@ -98,7 +98,7 @@ const Login = () => {
             alt=""
             className={`eye ${showPassword ? "show" : ""}`}
             onClick={togglePasswordVisibility}
-            style={{ width: "2.25vw" }}
+            style={{ width: "30px" }}
           />
         </div>
         <p

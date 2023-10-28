@@ -16,17 +16,17 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 30px;
-  .employees-div{
+  .employees-div {
     width: 80%;
     box-shadow: rgba(1, 143, 220, 0.779) 0px 3px 8px !important;
     padding: 1rem;
   }
-
 }
 #formdata {
   width: 80vw;
   .formdata-div {
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;    padding: 20px 0;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+    padding: 20px 0;
     margin-bottom: 80px;
     .formdata-img {
       width: 200px !important;
@@ -37,18 +37,21 @@
   }
 }
 .present-day {
-  background-color: green;}
+  background-color: green;
+}
 
-.absent-day{
+.absent-day {
   background-color: red;
 }
-.MuiTabs-root {
-  position: fixed;
-  top: 20vh; 
-  left: 0;
-}
 
-.MuiBox-root {
-  margin-left: 7vw; 
-}
+#dashboard {
+  .MuiTabs-root {
+    position: fixed;
+    top: 20vh;
+    left: 0;
+  }
 
+  .MuiBox-root {
+    margin-left: 7vw;
+  }
+}
