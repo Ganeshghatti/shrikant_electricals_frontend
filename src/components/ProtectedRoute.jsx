@@ -5,7 +5,7 @@ export default function ProtectedRoute({ children }) {
   const employee = JSON.parse(localStorage.getItem("employee"));
 
   if (!employee || !employee.isauthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/user-not-found" />;
   }
   return children;
 }

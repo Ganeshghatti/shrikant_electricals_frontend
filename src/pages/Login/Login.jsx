@@ -44,7 +44,6 @@ const Login = () => {
           employeeData
         );
         console.log("Login success")
-        dispatch(stopLoading());
         const employee = {
           email: response.data.email,
           token: response.data.token,

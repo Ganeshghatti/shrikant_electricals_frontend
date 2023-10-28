@@ -90,14 +90,10 @@ export default function Account() {
           );
           setaccountdetails(response.data);
           setload(true);
+          dispatch(stopLoading());
+
           const last7 = [...response.data.user.Attendence.slice(-7)].reverse();
           setLast7Attendence(last7);
-          console.log(last7);
-          console.log(
-            response.data.user.Attendence[
-              response.data.user.Attendence.length - 1
-            ].day
-          );
           console.log(currentDay);
           if (
             response.data.user.Attendence[
@@ -107,7 +103,8 @@ export default function Account() {
             setattendancemarked(false);
           }
         } catch (error) {
-          window.location.href = `/login`;
+          dispatch(stopLoading());
+          window.location.href = `/user-not-found`;
         }
       }
     };
@@ -194,7 +191,7 @@ export default function Account() {
                     justifyContent: "flex-start",
                     overflowX: "auto",
                     gap: "15px",
-                    boxShadow:"none"
+                    boxShadow: "none",
                   }}
                 >
                   {last7Attendence &&
@@ -205,8 +202,8 @@ export default function Account() {
                             display: "flex",
                             flexDirection: "column",
                             backgroundColor: "white",
-                            alignItems:"center",
-                            justifyContent:"center"
+                            alignItems: "center",
+                            justifyContent: "center",
                           }}
                         >
                           <h6 style={{ color: "black" }}>{item.day}</h6>
