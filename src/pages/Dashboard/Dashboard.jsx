@@ -61,7 +61,7 @@ export default function Dashboard() {
   const fetchData = async (tabIndex) => {
     if (tabIndex === 0) {
       try {
-        const response = await axios.get(`http://localhost:5000/getformdata`, {
+        const response = await axios.get(`https://shrikant-electricals.onrender.com/getformdata`, {
           headers: {
             Authorization: `Bearer ${employee.employee.token}`,
           },
@@ -74,7 +74,7 @@ export default function Dashboard() {
     } else if (tabIndex === 1) {
       try {
         const response = await axios.get(
-          `http://localhost:5000/getemployeesdata`,
+          `https://shrikant-electricals.onrender.com/getemployeesdata`,
           {
             headers: {
               Authorization: `Bearer ${employee.employee.token}`,

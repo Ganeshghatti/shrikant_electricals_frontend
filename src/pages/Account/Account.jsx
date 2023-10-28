@@ -81,7 +81,7 @@ export default function Account() {
         try {
           console.log("account page");
           const response = await axios.get(
-            `http://localhost:5000/account/${username}`,
+            `https://shrikant-electricals.onrender.com/account/${username}`,
             {
               headers: {
                 Authorization: `Bearer ${employeeData.token}`,
@@ -127,7 +127,7 @@ export default function Account() {
     try {
       console.log(employeeData.token);
       const response = await axios.post(
-        "http://localhost:5000/markattendence",
+        "https://shrikant-electricals.onrender.com/markattendence",
         {},
         {
           headers: {

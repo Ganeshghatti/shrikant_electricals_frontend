@@ -40,7 +40,7 @@ const Login = () => {
         dispatch(startLoading());
         console.log("login started")
         const response = await axios.post(
-          "http://localhost:5000/login",
+          "https://shrikant-electricals.onrender.com/login",
           employeeData
         );
         console.log("Login success")

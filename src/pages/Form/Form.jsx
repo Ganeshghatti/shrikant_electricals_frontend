@@ -120,7 +120,7 @@ const Form = () => {
 
     try {
       console.log("data being sent to backend", formData, imageURLs);
-      const response = await axios.post("http://localhost:5000/form", {
+      const response = await axios.post("https://shrikant-electricals.onrender.com/form", {
         ...formData,
         imageURLs: imageURLs,
       });
