@@ -181,9 +181,6 @@ const Form = () => {
             label="Name"
             onChange={handleInputChange}
             value={formData.name}
-            InputProps={{
-              startAdornment: <div style={{ marginRight: "20px" }} />,
-            }}
           />
           <TextField
             id="outlined-required"
@@ -191,9 +188,6 @@ const Form = () => {
             label="Email"
             value={formData.email}
             onChange={handleInputChange}
-            InputProps={{
-              startAdornment: <div style={{ marginRight: "20px" }} />,
-            }}
           />
         </MDBCol>
         <MDBCol
@@ -207,9 +201,6 @@ const Form = () => {
             label="Phone Number"
             value={formData.phoneNumber}
             onChange={handleInputChange}
-            InputProps={{
-              startAdornment: <span style={{ marginRight: "20px" }} />,
-            }}
           />
         </MDBCol>
       </MDBRow>
@@ -222,9 +213,6 @@ const Form = () => {
             value={formData.KW_HP}
             onChange={handleInputChange}
             type="number"
-            InputProps={{
-              startAdornment: <div style={{ marginRight: "20px" }} />,
-            }}
           />
           <div>
             <label htmlFor="balake">Choose Balake:</label>
