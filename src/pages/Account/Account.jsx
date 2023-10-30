@@ -122,8 +122,8 @@ export default function Account() {
   const currentDay = moment().format("dddd");
   const markattendencef = async () => {
     try {
-      console.log(employeeData.token);
-      const response = await axios.post(
+      dispatch(startLoading());
+      await axios.post(
         "https://shrikant-electricals.onrender.com/markattendence",
         {},
         {
@@ -132,7 +132,9 @@ export default function Account() {
           },
         }
       );
-      window.location.reload(); 
+      dispatch(stopLoading());
+
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
