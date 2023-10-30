@@ -132,7 +132,7 @@ export default function Account() {
           },
         }
       );
-      location.reload()
+      window.location.reload(); 
     } catch (error) {
       console.log(error);
     }
